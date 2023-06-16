@@ -1,6 +1,6 @@
 <template>
     <div>
-        <h1>Formulario</h1>
+        <h1>{{ nombre_cola }}</h1>
         <form @submit.prevent="enviarDatos">
             <label for="nombre">Nombre:</label>
             <input type="text" id="nombre" v-model="nombre" required>
@@ -25,6 +25,7 @@ import axios from 'axios'
 export default {
     data() {
         return {
+            nombre_cola:'',
             nombre: '',
             apellidos: '',
             email: '',
@@ -33,12 +34,13 @@ export default {
     },
     mounted() {
         // Obtener el ID de la URL y realizar la llamada a la base de datos para obtener la queue correspondiente
-        const queue_id = this.$route.params.id;
+        this.queue_id = this.$route.params.id;
         // Lógica para obtener la queue basada en el ID y actualizar los datos en el componente
-        axios.get(`http://localhost:5000/queue/` + queue_id)
+        axios.get(`http://localhost:5000/queue/` + this.queue_id)
             .then(response => {
                 console.log(response)
                 this.event = response.data;
+                this.nombre_cola = this.event.nombre
             })
             .catch(error => {
                 console.error(error);
@@ -52,9 +54,10 @@ export default {
                 apellidos: this.apellidos,
                 email: this.email,
                 telefono: this.telefono,
+                queue: this.queue_id
             };
             // Lógica para enviar los datos a la base de datos
-            axios.post('https://api.onequeue.com/users', datos)
+            axios.post('https://localhost:5000/users', datos)
                 .then(response => {
                     // Maneja la respuesta exitosa
                     console.log(response.data); // Puedes mostrar la respuesta en la consola o realizar otras acciones necesarias

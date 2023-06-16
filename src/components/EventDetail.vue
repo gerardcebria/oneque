@@ -33,11 +33,9 @@
         // Aquí puedes usar Axios o cualquier otra biblioteca de HTTP para realizar la llamada a la API
   
         // Ejemplo de solicitud GET con Axios
-        console.log('entra')
         // axios.get(`/api/eventos/${eventId}`)
         axios.get(`http://localhost:5000/queue`)
         .then(response => {
-            console.log(response)
             this.event = response.data[0];
           })
           .catch(error => {
