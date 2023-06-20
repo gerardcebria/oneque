@@ -1,22 +1,26 @@
 <template>
-  <!-- <img alt="Vue logo" src="./assets/logo.png"> -->
-  <!-- <HelloWorld msg="Welcome to Your Vue.js App"/> -->
-  <QRComponent/>
-  <EventDetail/>
+  <div>
+    <button>
+      <router-link to="/create" class="button">Crear cola</router-link>
+    </button>
+    <button>
+      <router-link to="/join" class="button">Unirse a la cola</router-link>
+    </button>
+  </div>
+  <!-- <QRComponent />
+  <EventDetail /> -->
 </template>
 
 <script>
-// import HelloWorld from './components/HelloWorld.vue'
-import EventDetail from './components/EventDetail.vue'
-import QRComponent from './components/QRComponent.vue'
-
+// import EventDetail from './components/EventDetail.vue'
+// import QRComponent from './components/QRComponent.vue'
+  
 export default {
   name: 'App',
   components: {
-    // HelloWorld,
-    EventDetail,
-    QRComponent
-}
+    // EventDetail,
+    // QRComponent
+  }
 }
 </script>
 
