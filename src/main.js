@@ -7,6 +7,7 @@ import * as directives from 'vuetify/directives'
 import { createRouter, createWebHistory } from 'vue-router';
 import JoinQueueComponent from './components/JoinQueueComponent';
 import CreateQueueComponent from './components/CreateQueueComponent';
+import TestQR from './components/TestQR';
 
 
 const router = createRouter({
@@ -23,6 +24,10 @@ const router = createRouter({
         {
             path: '/create',
             component: CreateQueueComponent
+        },
+        {
+            path: '/test/:id',
+            component: TestQR
         }
     ]
 });

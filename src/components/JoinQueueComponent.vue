@@ -1,6 +1,7 @@
 <template>
     <div>
       <h1>{{ nombre_cola }}</h1>
+      <h2>Hay {{n_personas}} delante de ti</h2>
       <v-form @submit.prevent="enviarDatos">
         <v-text-field v-model="nombre" label="Nombre" required></v-text-field>
         <v-text-field v-model="apellidos" label="Apellidos" required></v-text-field>
@@ -22,6 +23,7 @@ export default {
             apellidos: '',
             email: '',
             telefono: '',
+            n_personas: 'error'
         };
     },
     mounted() {
@@ -33,6 +35,14 @@ export default {
                 console.log(response)
                 this.event = response.data;
                 this.nombre_cola = this.event.nombre
+            })
+            .catch(error => {
+                console.error(error);
+            });
+        axios.get(`http://localhost:5000/user-quantity/${this.queue_id}`)
+            .then(response => {
+                console.log('THIS', response)
+                this.n_personas = response.data['count(id)'];
             })
             .catch(error => {
                 console.error(error);

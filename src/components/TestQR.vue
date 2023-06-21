@@ -1,4 +1,5 @@
 <template>
+    <h1> Prueba </h1>
     <div>
         <canvas ref="qrCode"></canvas>
     </div>
@@ -11,12 +12,12 @@ import QRious from 'qrious';
 export default {
     data() {
         return {
-            base_url: 'https://localhost:8080/', // URL que quieres convertir en QR
+            base_url: 'http://192.168.1.106:8080/join/', // URL que quieres convertir en QR
             qr: null, // Instancia de QRious
         };
     },
     mounted() {
-        this.eventId = this.$route.params.eventId;
+        this.eventId = this.$route.params.id;
         this.generateQR();
     },
     methods: {

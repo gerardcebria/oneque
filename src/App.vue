@@ -1,11 +1,11 @@
 <template>
   <div>
-    <button>
-      <router-link to="/create" class="button">Crear cola</router-link>
-    </button>
-    <button>
-      <router-link to="/join" class="button">Unirse a la cola</router-link>
-    </button>
+    <div class="container">
+      <v-btn to="/create" color="primary">Crear cola</v-btn>
+    </div>
+    <div class="container">
+      <v-btn to="/join" color="primary">Unirse a la cola</v-btn>
+    </div>
   </div>
   <!-- <QRComponent />
   <EventDetail /> -->
@@ -14,7 +14,7 @@
 <script>
 // import EventDetail from './components/EventDetail.vue'
 // import QRComponent from './components/QRComponent.vue'
-  
+
 export default {
   name: 'App',
   components: {
