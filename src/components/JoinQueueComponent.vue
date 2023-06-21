@@ -50,14 +50,15 @@ export default {
         enviarDatos() {
             // Aquí puedes realizar la lógica para enviar los datos a la base de datos "onequeue" en la tabla "users"
             const datos = {
-                nombre: this.nombre,
-                apellidos: this.apellidos,
+                name: this.nombre,
+                lastname: this.apellidos,
                 email: this.email,
-                telefono: this.telefono,
+                phone: this.telefono,
                 queue: this.queue_id
             };
+            console.log(datos)
             // Lógica para enviar los datos a la base de datos
-            axios.post('https://localhost:5000/users', datos)
+            axios.post(`http://localhost:5000/user`, datos)
                 .then(response => {
                     // Maneja la respuesta exitosa
                     console.log(response.data); // Puedes mostrar la respuesta en la consola o realizar otras acciones necesarias
