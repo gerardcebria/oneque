@@ -1,21 +1,13 @@
 <template>
     <div>
-        <h1>{{ nombre_cola }}</h1>
-        <form @submit.prevent="enviarDatos">
-            <label for="nombre">Nombre:</label>
-            <input type="text" id="nombre" v-model="nombre" required>
-
-            <label for="apellidos">Apellidos:</label>
-            <input type="text" id="apellidos" v-model="apellidos" required>
-
-            <label for="email">Email:</label>
-            <input type="email" id="email" v-model="email" required>
-
-            <label for="telefono">Teléfono:</label>
-            <input type="tel" id="telefono" v-model="telefono" required>
-
-            <button type="submit">Enviar</button>
-        </form>
+      <h1>{{ nombre_cola }}</h1>
+      <v-form @submit.prevent="enviarDatos">
+        <v-text-field v-model="nombre" label="Nombre" required></v-text-field>
+        <v-text-field v-model="apellidos" label="Apellidos" required></v-text-field>
+        <v-text-field v-model="email" label="Email" type="email" required></v-text-field>
+        <v-text-field v-model="telefono" label="Teléfono" type="tel" required></v-text-field>
+        <v-btn type="submit" color="primary">Enviar</v-btn>
+      </v-form>
     </div>
 </template>
   
