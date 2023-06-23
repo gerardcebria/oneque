@@ -12,11 +12,9 @@ export const getUserQuantity = (queue_id) => {
 }
 
 export const sendUserData = (data) =>{
-    console.log('entra')
     return axios.post(`http://localhost:5000/user`, data)
     .then(response => {
         // Maneja la respuesta exitosa
-        console.log('entra2')
         return response.data; // Puedes mostrar la respuesta en la consola o realizar otras acciones necesarias
     })
     .catch(error => {

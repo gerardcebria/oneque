@@ -1,10 +1,7 @@
 <template>
-    <div class="container">
-        <div class="row">
+    <div >
             <div class="col-sm"></div>
             <div class="col-sm">
-                <h1>{{ nombre_cola }}</h1>
-                <h2>Hay {{n_personas}} personas delante de ti</h2>
                 <form @submit.prevent="enviarDatos">
 
                     <div class="form-group form-floating mb-3">
@@ -34,35 +31,22 @@
             </div>
             <div class="col-sm"></div>
         </div>
-    </div>
 </template>
   
 <script>
-import {getQueueById} from '../api/queue'
-import {getUserQuantity, sendUserData} from '../api/user'
+import {sendUserData} from '../api/user'
 
 
 export default {
     data() {
         return {
-            nombre_cola: '',
+
             nombre: '',
             apellidos: '',
             email: '',
-            telefono: '',
-            n_personas: 'error'
-        };
+            telefono: ''        };
     },
     mounted() {
-        // Obtener el ID de la URL y realizar la llamada a la base de datos para obtener la queue correspondiente
-        this.queue_id = this.$route.params.id;
-        getQueueById(this.queue_id).then((queue)=>{
-            this.nombre_cola = queue.nombre
-        })
-        getUserQuantity(this.queue_id).then((response)=>{
-            this.n_personas = response;
-        })
-        
     },
     methods: {
         enviarDatos() {
@@ -74,11 +58,8 @@ export default {
                 phone: this.telefono,
                 queue: this.queue_id
             };
-            console.log(datos)
             // Lógica para enviar los datos a la base de datos
             sendUserData(datos)
-
-
         }
     }
 };

@@ -3,7 +3,7 @@ import App from './App.vue';
 import "bootstrap/dist/css/bootstrap.min.css"
 import "bootstrap"  
 import { createRouter, createWebHistory } from 'vue-router';
-import JoinQueueComponent from './components/JoinQueueComponent';
+import JoinProcess from './views/JoinProcess';
 import CreateQueueComponent from './components/CreateQueueComponent';
 import TestQR from './components/TestQR';
 
@@ -17,7 +17,7 @@ const router = createRouter({
         },
         {
             path: '/join/:id',
-            component: JoinQueueComponent
+            component: JoinProcess
         },
         {
             path: '/create',
