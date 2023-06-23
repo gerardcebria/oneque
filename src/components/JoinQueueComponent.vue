@@ -1,24 +1,51 @@
 <template>
-    <div>
-      <h1>{{ nombre_cola }}</h1>
-      <h2>Hay {{n_personas}} delante de ti</h2>
-      <v-form @submit.prevent="enviarDatos">
-        <v-text-field v-model="nombre" label="Nombre" required></v-text-field>
-        <v-text-field v-model="apellidos" label="Apellidos" required></v-text-field>
-        <v-text-field v-model="email" label="Email" type="email" required></v-text-field>
-        <v-text-field v-model="telefono" label="Teléfono" type="tel" required></v-text-field>
-        <v-btn type="submit" color="primary">Enviar</v-btn>
-      </v-form>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm"></div>
+            <div class="col-sm">
+                <h1>{{ nombre_cola }}</h1>
+                <h2>Hay {{n_personas}} personas delante de ti</h2>
+                <form @submit.prevent="enviarDatos">
+
+                    <div class="form-group form-floating mb-3">
+                        <input type="text" class="form-control" id="nombre" v-model="nombre" placeholder="Nombre" required>
+                        <label for="nombre">Nombre</label>
+                    </div>
+
+
+                    <div class="form-group form-floating mb-3">
+                        <input type="text" class="form-control" id="apellidos" v-model="apellidos" placeholder="Apellidos" required>
+                        <label for="apellidos">Apellidos</label>
+                    </div>
+
+                    <div class="form-group form-floating mb-3">
+                        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+                        placeholder="Enter email">
+                        <label for="exampleInputEmail1">Email address</label>
+                    </div>
+                    <div class="form-group form-floating mb-3">
+                        <input type="text" class="form-control" id="telefono" v-model="telefono" placeholder="Apellidos"
+                        required>
+                        <label for="telefono">Telefono</label>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </form>
+            </div>
+            <div class="col-sm"></div>
+        </div>
     </div>
 </template>
   
 <script>
-import axios from 'axios'
+import {getQueueById} from '../api/queue'
+import {getUserQuantity, sendUserData} from '../api/user'
+
 
 export default {
     data() {
         return {
-            nombre_cola:'',
+            nombre_cola: '',
             nombre: '',
             apellidos: '',
             email: '',
@@ -29,24 +56,13 @@ export default {
     mounted() {
         // Obtener el ID de la URL y realizar la llamada a la base de datos para obtener la queue correspondiente
         this.queue_id = this.$route.params.id;
-        // Lógica para obtener la queue basada en el ID y actualizar los datos en el componente
-        axios.get(`http://localhost:5000/queue/` + this.queue_id)
-            .then(response => {
-                console.log(response)
-                this.event = response.data;
-                this.nombre_cola = this.event.nombre
-            })
-            .catch(error => {
-                console.error(error);
-            });
-        axios.get(`http://localhost:5000/user-quantity/${this.queue_id}`)
-            .then(response => {
-                console.log('THIS', response)
-                this.n_personas = response.data['count(id)'];
-            })
-            .catch(error => {
-                console.error(error);
-            });
+        getQueueById(this.queue_id).then((queue)=>{
+            this.nombre_cola = queue.nombre
+        })
+        getUserQuantity(this.queue_id).then((response)=>{
+            this.n_personas = response;
+        })
+        
     },
     methods: {
         enviarDatos() {
@@ -60,15 +76,7 @@ export default {
             };
             console.log(datos)
             // Lógica para enviar los datos a la base de datos
-            axios.post(`http://localhost:5000/user`, datos)
-                .then(response => {
-                    // Maneja la respuesta exitosa
-                    console.log(response.data); // Puedes mostrar la respuesta en la consola o realizar otras acciones necesarias
-                })
-                .catch(error => {
-                    // Maneja el error
-                    console.error(error);
-                });
+            sendUserData(datos)
 
 
         }
