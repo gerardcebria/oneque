@@ -1,10 +1,14 @@
 <template>
   <div>
-    <div class="container">
-      <v-btn to="/create" color="primary">Crear cola</v-btn>
+    <div class="container mb-3">
+      <router-link to="/create">
+        <v-btn class="btn btn-primary">Crear cola</v-btn>
+      </router-link>
     </div>
-    <div class="container">
-      <v-btn to="/join" color="primary">Unirse a la cola</v-btn>
+    <div class="container mb-3">
+      <router-link to="/join">
+        <button class="btn btn-primary">Unirse a la cola</button>
+      </router-link>
     </div>
   </div>
   <!-- <QRComponent />
