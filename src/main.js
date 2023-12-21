@@ -2,39 +2,37 @@ import { createApp } from 'vue/dist/vue.esm-bundler';
 import App from './App.vue';
 import "bootstrap/dist/css/bootstrap.min.css"
 import "bootstrap"  
-import { createRouter, createWebHistory } from 'vue-router';
-import JoinProcess from './views/JoinProcess';
-import CreateQueueComponent from './components/CreateQueueComponent';
-import TestQR from './components/TestQR';
+import router from './router'
+import VueQrcodeReader from 'vue-qrcode-reader';
 
 
-const router = createRouter({
-    history: createWebHistory(),
-    routes: [
-        {
-            path: '/',
-            component: App
+// Vuetify
+import 'vuetify/styles'
+import { createVuetify } from 'vuetify'
+import * as components from 'vuetify/components'
+import * as directives from 'vuetify/directives'
+import { aliases, mdi } from 'vuetify/iconsets/mdi'
+
+
+const vuetify = createVuetify({
+    components,
+    directives,
+    icons: {
+        defaultSet: 'mdi',
+        aliases,
+        sets: {
+          mdi,
         },
-        {
-            path: '/join/:id',
-            component: JoinProcess
-        },
-        {
-            path: '/create',
-            component: CreateQueueComponent
-        },
-        {
-            path: '/test/:id',
-            component: TestQR
-        }
-    ]
-});
+      },
+  })
 
 
 
-const app = createApp({});
+const app = createApp(App);
 
 app.use(router);
+app.use(vuetify)
+app.use(VueQrcodeReader)
 
 
 
